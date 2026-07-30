@@ -1,5 +1,7 @@
 ---
 import "../styles/global.css";
+import background from '../assets/background.svg';
+
 ---
 <!doctype html>
 <html lang="en">
@@ -12,6 +14,8 @@ import "../styles/global.css";
 		<title>Astro Basics</title>
 	</head>
 	<body class="mx-5 md:mx-10 lg:mx-24 xl:mx-30">
+	<img id="background" src={background.src} alt="" fetchpriority="high" />
+
 		<nav class="w-full flex justify-end p-3">
 			<img src="/img/logo-medspa.webp" alt="MEDSPA Logo" class="" />
 		</nav>
