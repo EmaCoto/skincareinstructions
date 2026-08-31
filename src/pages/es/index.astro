@@ -1,12 +1,12 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { products } from '../../data/products';
+import { products, productImages } from '../../data/products';
 ---
 <Layout title="Instrucciones de Skincare | kiwiMEDSPA" description="Instrucciones de productos de skincare de kiwiMEDSPA.">
  <main class="home-page">
   <header class="home-hero"><p class="eyebrow">Guía de productos kiwiMEDSPA</p><h1>Tu skincare, más sencillo.</h1><p class="intro">Selecciona un producto para consultar toda la información de sus tarjetas.</p></header>
   <section aria-labelledby="products-title"><div class="section-heading"><h2 id="products-title">Instrucciones de skincare</h2><p>{products.length} productos</p></div>
-   <div class="product-grid">{products.map((product,index) => <a class="product-card" href={`/es/${product.slug}`}><span class="card-index">{String(index+1).padStart(2,'0')}</span><div><p class="card-brand">{product.brand}</p><h3>{product.name}</h3>{product.detail && <p class="card-detail">{product.detail}</p>}</div><span class="card-arrow" aria-hidden="true">↗</span></a>)}</div>
+   <div class="product-grid">{products.map((product,index) => <a class="product-card" href={`/es/${product.slug}`}><span class="card-index">{String(index+1).padStart(2,'0')}</span><div class="card-copy"><p class="card-brand">{product.brand}</p><h3>{product.name}</h3>{product.detail && <p class="card-detail">{product.detail}</p>}</div><img class="card-product-image" src={productImages[index]} alt={product.name} loading="lazy" /><span class="card-arrow" aria-hidden="true">↗</span></a>)}</div>
   </section>
  </main>
 </Layout>
