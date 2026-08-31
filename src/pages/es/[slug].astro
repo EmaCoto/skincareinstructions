@@ -1,0 +1,18 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { products } from '../../data/products';
+export function getStaticPaths() { return products.map((product,index) => ({ params:{slug:product.slug}, props:{product,index} })); }
+const { product,index } = Astro.props;
+const front = `/cards-es/card-${String(index*2+1).padStart(2,'0')}.webp`;
+const back = `/cards-es/card-${String(index*2+2).padStart(2,'0')}.webp`;
+---
+<Layout title={`${product.name} | Instrucciones de Skincare`} description={`Instrucciones de skincare para ${product.name}.`}>
+ <main class="product-page">
+  <a class="back-link" href="/es">← Todos los productos</a>
+  <header class="product-hero"><p class="eyebrow">{product.brand}</p><h1>{product.name}</h1>{product.detail && <p class="product-detail">{product.detail}</p>}</header>
+  <section class="original-cards" aria-label={`Tarjetas informativas de ${product.name}`}>
+   <figure class="card-side"><img src={front} alt={`Información de ${product.name} — frente`} /></figure>
+   <figure class="card-side card-side--back"><img src={back} alt={`Información de ${product.name} — reverso`} /><a class="qr-replacement" href="https://kiwimedspa.com/" target="_blank" rel="noreferrer"><span>VISITAR</span><strong>kiwimedspa.com</strong><span>↗</span></a></figure>
+  </section>
+ </main>
+</Layout>

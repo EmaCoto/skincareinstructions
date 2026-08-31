@@ -1,67 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro';
-
-const services = [
-	{
-		title: 'TED® Hair Restoration',
-		pre: '/pre-ted-hair-restoration',
-		post: '/post-ted-hair-restoration',
-	},
-	{
-		title: 'Tattoo Removal',
-		pre: '/pre-tatto-removal',
-		post: '/post-tatto-removal',
-	},
-	{
-		title: 'PIXEL CO2',
-		pre: '/pre-pixel',
-		post: '/post-pixel',
-	},
-	{
-		title: 'Opus',
-		pre: '/pre-opus',
-		post: '/post-opus',
-	},
-	{
-		title: 'MICRONEEDLING (ReNu Pen®)',
-		pre: '/pre-microneedling',
-		post: '/post-microneedling',
-	},
-];
+import { products } from '../data/products';
 ---
-
-<Layout>
-	<main class="mx-auto w-full max-w-6xl py-8 md:py-12">
-		<header class="mb-8 text-center md:mb-12">
-			<h1>Treatment Instructions</h1>
-		</header>
-
-		<section class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-			{services.map((service) => (
-				<article class="flex min-h-64 flex-col justify-between rounded-2xl border border-[#E0D1B8] bg-white/80 p-6 shadow-[0_12px_35px_rgba(106,78,52,0.10)] backdrop-blur-sm">
-					<h2 class="text-center">{service.title}</h2>
-
-					<div class="mt-8 flex flex-col gap-3">
-						{service.pre && (
-							<a
-								href={service.pre}
-								class="rounded-full border border-[#A98453] px-5 py-3 text-center text-[#6A4E34] transition hover:bg-[#F4F4F4] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#A98453]"
-							>
-								Pre-Treatment
-							</a>
-						)}
-
-						{service.post && (
-							<a
-								href={service.post}
-								class="rounded-full bg-[#123338] px-5 py-3 text-center text-white transition hover:bg-[#1b484f] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#123338]"
-							>
-								Post-Treatment
-							</a>
-						)}
-					</div>
-				</article>
-			))}
-		</section>
-	</main>
+<Layout title="Skincare Instructions | kiwiMEDSPA" description="Product skincare instructions from kiwiMEDSPA.">
+ <main class="home-page">
+  <header class="home-hero"><p class="eyebrow">kiwiMEDSPA product guide</p><h1>Your skincare, made simple.</h1><p class="intro">Select a product to see what it is, when to use it, and whether it belongs in your routine.</p></header>
+  <section aria-labelledby="products-title"><div class="section-heading"><h2 id="products-title">Skincare instructions</h2><p>{products.length} products</p></div>
+   <div class="product-grid">{products.map((product,index) => <a class="product-card" href={`/${product.slug}`}><span class="card-index">{String(index+1).padStart(2,'0')}</span><div><p class="card-brand">{product.brand}</p><h3>{product.name}</h3>{product.detail && <p class="card-detail">{product.detail}</p>}</div><span class="card-arrow" aria-hidden="true">↗</span></a>)}</div>
+  </section>
+ </main>
 </Layout>

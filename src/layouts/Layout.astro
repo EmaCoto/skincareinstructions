@@ -1,30 +1,11 @@
 ---
-import "../styles/global.css";
-import background from '../assets/background.svg';
-
+import '../styles/global.css';
+interface Props { title?:string; description?:string; }
+const { title='Skincare Instructions | kiwiMEDSPA', description='Skincare product instructions from kiwiMEDSPA.' } = Astro.props;
+const isSpanish = Astro.url.pathname === '/es' || Astro.url.pathname.startsWith('/es/');
+const englishPath = isSpanish ? (Astro.url.pathname.replace(/^\/es/, '') || '/') : Astro.url.pathname;
+const spanishPath = isSpanish ? Astro.url.pathname : `/es${Astro.url.pathname === '/' ? '' : Astro.url.pathname}`;
 ---
 <!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body class="mx-5 md:mx-10 lg:mx-24 xl:mx-30">
-	<img id="background" src={background.src} alt="" fetchpriority="high" />
-
-		<nav class="w-full flex justify-end p-3">
-			<img src="/img/logo-medspa.webp" alt="MEDSPA Logo" class="" />
-		</nav>
-
-		<slot />
-
-		<footer>
-
-		</footer>
-	</body>
-</html>
- 
+<html lang={isSpanish ? 'es' : 'en'}><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><meta name="robots" content="noindex, nofollow, noarchive, nosnippet" /><meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet" /><meta name="description" content={description} /><link rel="icon" type="image/svg+xml" href="/favicon.svg" /><link rel="icon" href="/favicon.ico" /><title>{title}</title></head>
+<body><div class="page-shell"><nav class="site-nav" aria-label={isSpanish ? 'Navegación principal' : 'Main navigation'}><a href={isSpanish ? '/es' : '/'} aria-label={isSpanish ? 'Inicio de instrucciones de skincare' : 'Skincare instructions home'}><img src="/img/logo-medspa.webp" alt="kiwiMEDSPA" /></a><div class="nav-actions"><div class="language-switcher" aria-label={isSpanish ? 'Seleccionar idioma' : 'Select language'}><a class:list={{active:!isSpanish}} href={englishPath} lang="en" aria-current={!isSpanish ? 'page' : undefined}>🇺🇸 <span>English</span></a><a class:list={{active:isSpanish}} href={spanishPath} lang="es" aria-current={isSpanish ? 'page' : undefined}>🇪🇸 <span>Español</span></a></div><a class="clinic-link" href="https://kiwimedspa.com/" target="_blank" rel="noreferrer">{isSpanish ? 'Sitio principal' : 'Main website'} ↗</a></div></nav><slot /><footer><span>kiwiMEDSPA</span><span>470-310-8155</span></footer></div></body></html>
